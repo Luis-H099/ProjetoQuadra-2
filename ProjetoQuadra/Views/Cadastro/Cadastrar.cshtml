@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = "_Layout";
+}
+@model Usuarios
+@{
+    var msgErro = TempData["MsgErro"] as string;
+}
+
+@if (!string.IsNullOrEmpty(msgErro))
+{
+    <div class="alert alert-danger" role="alert">
+        <strong>Erro:</strong> @msgErro
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Projeto PI</title>
+    <link rel="stylesheet" href="~/css/cadastro.css">
+</head>
+<body>
+
+    <div class="Principal">
+
+        <img src='~/lib/Imagens/QuadraMais.png' alt="Logo Quadra+" width="200">
+
+        <div class="campo">
+
+            <form asp-controller="Cadastro" asp-action="CadastrarUsuario" method="post">
+
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+                <br><br>
+
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" name="cpf" required>
+                <br><br>
+
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+                <br><br>
+
+                <div class="Cadastrar">
+                    <button type="submit">Cadastrar</button>
+                </div>
+
+            </form>
+            <form asp-controller="Cadastro" asp-action="Index" method="post">
+            <button type="submit" >Sair</button>
+            </form>
+        </div>
+    </div>
+</body>

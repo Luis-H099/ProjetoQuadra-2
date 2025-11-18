@@ -1,0 +1,213 @@
+html,body{height:100%}
+body {
+    margin: 0;
+    background: #f0f0f0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #222;
+    outline: 5px solid red;
+}
+
+.moldura{
+  width:min(1100px,95vw);
+  background:#fff;
+  border:8px solid #57a285;
+  border-radius:20px;
+  box-shadow:0 0 15px rgba(0,0,0,.15);
+  padding:24px;
+}
+
+.topo{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+.marca{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.logo{
+  width:90px;
+  height:90px;
+  border-radius:14px;
+  object-fit:cover;
+}
+.subtitulo{
+  font-size:14px;
+  color:#333;
+}
+
+
+.escolher-quadra{
+  display:flex;
+  gap:16px;
+}
+
+.opcao-quadra{
+  background:#fff;
+  border:3px solid #57a285;
+  border-radius:18px;
+  padding:6px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  transition:.2s;
+}
+.opcao-quadra img{
+  width:130px;
+  height:80px;
+  border-radius:12px;
+  object-fit:cover;
+}
+.opcao-quadra.ativo{
+  outline:4px solid #4a8d73;
+}
+.opcao-quadra:hover{
+  transform:scale(1.04);
+}
+
+
+.conteudo{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+}
+
+.cartao{
+  border:6px solid #57a285;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 0 10px rgba(0,0,0,.10);
+}
+
+
+.cabeca-cartao{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+#data{
+  padding:6px 10px;
+  border:2px solid #000;
+  border-radius:8px;
+}
+
+.mes{
+  margin:10px 0;
+  background:#000;
+  color:#fff;
+  padding:8px 12px;
+  border-radius:8px;
+  font-weight:800;
+}
+
+.semana,.dias{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+  text-align:center;
+}
+
+.dias li{
+  background:#fafafa;
+  border-radius:10px;
+  border:1px solid #ddd;
+  padding:8px 0;
+}
+.fora{opacity:.4}
+.hoje{outline:3px solid #57a285; background:#e6f6ee}
+
+
+.cabecalho-horarios{
+  display:grid;
+  grid-template-columns:1fr 120px;
+  background:#f7f7f7;
+  border-radius:8px;
+  padding:8px 12px;
+  font-weight:bold;
+}
+.col-status{text-align:right;}
+
+.lista-horarios{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+.lista-horarios li{
+  display:grid;
+  grid-template-columns:1fr 120px;
+  padding:10px 12px;
+  border-bottom:1px solid #ddd;
+}
+.lista-horarios li.ocupado{
+  background:#e6e6e6;
+}
+
+.etiqueta{
+  padding:6px 10px;
+  border-radius:8px;
+  border:2px solid #000;
+  font-weight:bold;
+  text-align:center;
+}
+.ocupado{background:#d9d9d9;}
+.livre{background:#fff;}
+
+
+.acoes{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:20px;
+}
+
+.mensagem-sucesso{
+  flex:1;
+  background:#57a285;
+  color:#fff;
+  padding:14px;
+  border-radius:30px;
+  text-align:center;
+  font-weight:bold;
+}
+.cartao.calendario .dias li.selecionado {
+    background-color: #5cb85c !important;
+    color: white !important;
+}
+
+/* ===== BOTÃO SAIR FIXO ===== */
+.btn-sair-fixo {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    background: #ff1f1f;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    padding: 15px 28px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0.25s ease;
+    z-index: 9999;
+}
+
+.btn-sair-fixo:hover {
+    background: #d60000;
+    transform: scale(1.05);
+}
+
+

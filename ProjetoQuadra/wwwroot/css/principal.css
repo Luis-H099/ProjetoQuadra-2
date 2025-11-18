@@ -1,0 +1,142 @@
+/* Estilo base */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #222;
+  }
+  
+  /* Cabeçalho */
+  header {
+    background-color: #57a285;
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+  }
+  
+  .logo-area img {
+    width: 100px;
+    height: auto;
+    border-radius: 15px;
+  }
+  
+  .logo-area h1 {
+    margin: 10px 0 5px;
+    font-size: 2.2em;
+  }
+  
+  .logo-area p {
+    margin: 0;
+    font-size: 1.1em;
+  }
+  
+  /* Menu */
+  nav {
+    background-color: #4a8d73;
+    margin-top: 15px;
+  }
+  
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  nav li {
+    margin: 10px 20px;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: color 0.2s;
+  }
+  
+  nav a:hover {
+    color: #cce9dc;
+  }
+  
+  /* Conteúdo principal */
+  main {
+    background-color: white;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  text-align: justify;
+  }
+  
+  .texto-imagem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .texto-imagem img {
+    width: 220px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+  
+  .texto-imagem .texto {
+    flex: 1;
+    padding: 0 25px;
+  }
+  
+  
+  .texto-imagem h2 {
+    color: #000;
+    font-size: 1.5em;
+  }
+
+  p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    font-size: 1.25em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+  
+  .descricao {
+    margin-top: 30px;
+    font-size: 1.25em;
+    line-height: 1.6;
+  }
+  
+  /* Rodapé */
+  footer {
+    background-color: #57a285;
+    text-align: center;
+    color: white;
+    font-size: 1.2em;
+    padding: 25px 10px;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .texto-imagem {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .texto-imagem img {
+      width: 80%;
+      margin: 10px 0;
+    }
+  
+    nav li {
+      margin: 8px 10px;
+    }
+  }
+  

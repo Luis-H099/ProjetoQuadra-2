@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel do Admin</title>
+  <link rel="stylesheet" href="Admin.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Painel do Administrador</h1>
+
+    <!-- BEBIDAS -->
+    <section class="secao">
+      <h2>Bebidas</h2>
+      <div class="botoes">
+        <button class="btn" onclick="mostrarTela('addBebida')">Adicionar</button>
+        <button class="btn" onclick="mostrarTela('delBebida')">Apagar</button>
+      </div>
+
+      <!-- Tela adicionar -->
+      <div id="addBebida" class="painel oculto">
+        <h3>Adicionar Bebida</h3>
+        <input type="text" placeholder="Nome da bebida">
+        <input type="number" placeholder="Preço (R$)">
+        <button class="btn confirmar">Adicionar</button>
+      </div>
+
+      <!-- Tela apagar -->
+      <div id="delBebida" class="painel oculto">
+        <h3>Apagar Bebida</h3>
+        <ul class="lista">
+          <li onclick="selecionarItem(this, 'Bebida Coca-Cola')">Coca-Cola</li>
+          <li onclick="selecionarItem(this, 'Bebida Pepsi')">Pepsi</li>
+          <li onclick="selecionarItem(this, 'Bebida Guaraná')">Guaraná</li>
+        </ul>
+        <button class="btn confirmar">Confirmar Exclusão</button>
+      </div>
+    </section>
+
+    <!-- COMIDAS -->
+    <section class="secao">
+      <h2>Comidas</h2>
+      <div class="botoes">
+        <button class="btn" onclick="mostrarTela('addComida')">Adicionar</button>
+        <button class="btn" onclick="mostrarTela('delComida')">Apagar</button>
+      </div>
+
+      <div id="addComida" class="painel oculto">
+        <h3>Adicionar Comida</h3>
+        <input type="text" placeholder="Nome da comida">
+        <input type="number" placeholder="Preço (R$)">
+        <button class="btn confirmar">Adicionar</button>
+      </div>
+
+      <div id="delComida" class="painel oculto">
+        <h3>Apagar Comida</h3>
+        <ul class="lista">
+          <li onclick="selecionarItem(this, 'Comida Pastel')">Pastel</li>
+          <li onclick="selecionarItem(this, 'Comida Coxinha')">Coxinha</li>
+          <li onclick="selecionarItem(this, 'Comida Pão de queijo')">Pão de queijo</li>
+        </ul>
+        <button class="btn confirmar">Confirmar Exclusão</button>
+      </div>
+    </section>
+
+    <!-- QUADRAS -->
+    <section class="secao">
+      <h2>Quadras</h2>
+      <div class="botoes">
+        <button class="btn" onclick="mostrarTela('addQuadra')">Adicionar</button>
+        <button class="btn" onclick="mostrarTela('delQuadra')">Apagar</button>
+      </div>
+
+      <div id="addQuadra" class="painel oculto">
+        <h3>Adicionar Quadra</h3>
+        <input type="text" placeholder="Nome da quadra">
+        <input type="text" placeholder="Tipo (Futebol, Vôlei...)">
+        <button class="btn confirmar">Adicionar</button>
+      </div>
+
+      <div id="delQuadra" class="painel oculto">
+        <h3>Apagar Quadra</h3>
+        <ul class="lista">
+          <li onclick="selecionarItem(this, 'Quadra Vôlei Areia')">Quadra Vôlei Areia</li>
+          <li onclick="selecionarItem(this, 'Quadra Vôlei Quadra')">Quadra Vôlei Quadra</li>
+          <li onclick="selecionarItem(this, 'Quadra Futsal')">Quadra Futsal</li>
+        </ul>
+        <button class="btn confirmar">Confirmar Exclusão</button>
+      </div>
+    </section>
+
+    <!-- BOLAS -->
+    <section class="secao">
+      <h2>Bolas</h2>
+      <div class="botoes">
+        <button class="btn" onclick="mostrarTela('addBola')">Adicionar</button>
+        <button class="btn" onclick="mostrarTela('delBola')">Apagar</button>
+      </div>
+
+      <div id="addBola" class="painel oculto">
+        <h3>Adicionar Bola</h3>
+        <input type="text" placeholder="Tipo de bola">
+        <input type="number" placeholder="Quantidade">
+        <button class="btn confirmar">Adicionar</button>
+      </div>
+
+      <div id="delBola" class="painel oculto">
+        <h3>Apagar Bola</h3>
+        <ul class="lista">
+          <li onclick="selecionarItem(this, 'Bola Futebol')">Futebol</li>
+          <li onclick="selecionarItem(this, 'Bola Basquete')">Basquete</li>
+          <li onclick="selecionarItem(this, 'Bola Vôlei')">Vôlei</li>
+        </ul>
+        <button class="btn confirmar">Confirmar Exclusão</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function mostrarTela(id) {
+      document.querySelectorAll('.painel').forEach(p => p.classList.add('oculto'));
+      document.getElementById(id).classList.remove('oculto');
+    }
+
+    function selecionarItem(elemento, nome) {
+      document.querySelectorAll('.lista li').forEach(li => li.classList.remove('selecionado'));
+      elemento.classList.add('selecionado');
+      const url = new URL(window.location);
+      url.searchParams.set('delete', nome);
+      window.history.replaceState({}, '', url);
+    }
+  </script>
+</body>
+</html>

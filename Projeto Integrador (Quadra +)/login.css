@@ -1,0 +1,113 @@
+/* Fundo geral */
+body {
+    background-color: #f0f0f0;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Container principal */
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 8px solid #57a285;
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 800px;
+    width: 90%;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    position: relative;
+  }
+  
+  .formulario {
+    flex: 1;
+    border: 6px solid #57a285;
+    border-radius: 10px;
+    padding: 40px 30px;
+    max-width: 350px;
+    background-color: white;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    border: none;
+    border-bottom: 2px solid black;
+    margin-bottom: 25px;
+    font-size: 1em;
+    padding: 8px 0;
+    outline: none;
+  }
+  
+  .btn-entrar {
+    background-color: #57a285;
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 0;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn-entrar:hover {
+    background-color: #4a8d73;
+  }
+  
+  .logo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logo img {
+    width: 200px;
+    height: auto;
+  }
+  
+  .sair {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    color: red;
+    font-size: 2em;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .sair:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 700px) {
+    .container {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .logo {
+      margin-top: 20px;
+    }
+  
+    .sair {
+      position: static;
+      margin-top: 15px;
+    }
+  }
+  

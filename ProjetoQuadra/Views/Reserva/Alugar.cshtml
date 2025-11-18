@@ -1,0 +1,145 @@
+﻿@{
+    Layout = "_Layout";
+}
+@model ReservasViewModel
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservas — Quadra+</title>
+    <link rel="stylesheet" href="~/css/alugar.css" />
+    <script src="~/js/reserva.js"></script>
+</head>
+
+<body>
+    <div class="moldura">
+
+        <header class="topo">
+            <div class="marca">
+                <img src="~/lib/Imagens/QuadraMais.png" alt="Logo Quadra+" class="logo">
+                <div>
+                    <h1>Quadra+</h1>
+                    <span class="subtitulo">Reservas - @Model.QuadraSelecionada.nome</span>
+                </div>
+            </div>
+
+            <nav class="escolher-quadra">
+                <button class="opcao-quadra @(Model.QuadraSelecionada.id_quadra == 1 ? "ativo" : "")" 
+                        type="button" 
+                        onclick="window.location.href = '@Url.Action("Alugar", "Reserva", new { quadraId = 1, dataSelecionada = Model.DataConsulta.ToString("yyyy-MM-dd") })'">
+                    <img src="~/lib/Imagens/icone-de-perfil (1).jpg" alt="Quadra interna">
+                    <span>Quadra de Madeira</span>
+                </button>
+
+                <button class="opcao-quadra @(Model.QuadraSelecionada.id_quadra == 2 ? "ativo" : "")" 
+                        type="button" 
+                        onclick="window.location.href = '@Url.Action("Alugar", "Reserva", new { quadraId = 2, dataSelecionada = Model.DataConsulta.ToString("yyyy-MM-dd") })'">
+                    <img src="~/lib/Imagens/icone-de-perfil (2).jpg" alt="Quadra areia">
+                    <span>Quadra de Areia</span>
+                </button>
+            </nav>
+        </header>
+
+        <main class="conteudo">
+
+            <section class="cartao calendario">
+                <div class="cabeca-cartao">
+                    <label for="data-input" class="rotulo">Escolher Dia:</label>
+
+                    <input id="data-input"
+                           type="date"
+                           value="@Model.DataConsulta.ToString("yyyy-MM-dd")"
+                           onchange="(function(val){
+                       var urlTemplate = '@Url.Action("Alugar", "Reserva", new { quadraId = Model.QuadraSelecionada.id_quadra, dataSelecionada = "__DATE__" })';
+                       window.location.href = urlTemplate.replace('__DATE__', val);
+                   })(this.value);" />
+                </div>
+
+                <div class="mes">
+                    <span id="mes-display">@Model.DataConsulta.ToString("MMMM").ToUpper()</span>
+                    <span id="ano-display">@Model.DataConsulta.Year</span>
+                </div>
+
+                <ol class="semana">
+                    <li>D</li><li>S</li><li>T</li><li>Q</li><li>Q</li><li>S</li><li>S</li>
+                </ol>
+
+                <ul id="dias-grid" class="dias">
+                    @{
+                        var sel = Model.DataConsulta;
+                        var f = new DateTime(sel.Year, sel.Month, 1);
+                        int start = (int)f.DayOfWeek;
+                        int daysInMonth = DateTime.DaysInMonth(sel.Year, sel.Month);
+
+                        for (int i = 0; i < start; i++)
+                        { <li class="fora"></li> }
+
+                        for (int d = 1; d <= daysInMonth; d++)
+                        {
+                            var thisDate = new DateTime(sel.Year, sel.Month, d);
+                            bool isSelected = thisDate.Date == sel.Date;
+                            <li class="@(isSelected ? "selecionado" : "")">@d</li>
+                        }
+                    }
+                </ul>
+
+                <div id="cal-base-url"
+                     data-url-template="@Url.Action("Alugar", "Reserva", new { quadraId = Model.QuadraSelecionada.id_quadra, dataSelecionada = "__DATE__" })"
+                     style="display:none;"></div>
+            </section>
+
+            <section class="cartao horarios">
+                <header class="cabecalho-horarios">
+                    <span>Horário</span>
+                    <span class="col-status">Situação</span>
+                </header>
+
+                <ul class="lista-horarios">
+                    @foreach (var slot in Model.SlotsDisponiveis)
+                    {
+                        <li class="@(slot.PodeReservar ? "" : slot.Status.ToLower())">
+                            <span>@slot.HorarioInicio - @slot.HorarioFim</span>
+
+                            @if (slot.PodeReservar)
+                            {
+                                <form asp-action="ReservarSlot"
+                                      asp-controller="Reserva"
+                                      method="post"
+                                      class="form-reserva-slot">
+                                    
+                                    <input type="hidden" name="QuadraId" value="@slot.QuadraId" />
+                                    <input type="hidden" name="DataSelecionada" value="@slot.DataSelecionada" />
+                                    <input type="hidden" name="HorarioInicio" value="@slot.HorarioInicio" />
+                                    <input type="hidden" name="HorarioFim" value="@slot.HorarioFim" />
+                                    @Html.AntiForgeryToken()
+
+                                    <button type="submit" class="etiqueta livre">Livre</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <span class="etiqueta @slot.Status.ToLower()">@slot.Status</span>
+                            }
+                        </li>
+                    }
+                </ul>
+            </section>
+
+        </main>
+
+        <footer class="acoes">
+            @if (!string.IsNullOrEmpty(Model.FeedbackMessage))
+            {
+                <div id="feedback-message"
+                     class="mensagem-sucesso is-visible @(Model.IsSuccessMessage ? "success" : "error")">
+                    @Model.FeedbackMessage
+                </div>
+            }
+        </footer>
+
+    </div> <!-- fim .moldura -->
+</body>
+
+<!-- BOTÃO SAIR FORA DO BODY -->
+<button class="btn-sair-fixo" onclick="window.location.href='@Url.Action("Index", "Home")'">
+    ❌ Sair
+</button>

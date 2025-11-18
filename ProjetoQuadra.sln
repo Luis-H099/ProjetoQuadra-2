@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36623.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoQuadra", "ProjetoQuadra\ProjetoQuadra.csproj", "{23E47AC8-BB10-4916-89A2-43F44D96BADE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23E47AC8-BB10-4916-89A2-43F44D96BADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23E47AC8-BB10-4916-89A2-43F44D96BADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23E47AC8-BB10-4916-89A2-43F44D96BADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23E47AC8-BB10-4916-89A2-43F44D96BADE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8A00CE8-F751-4746-BE1C-276A7EE29D24}
+	EndGlobalSection
+EndGlobal

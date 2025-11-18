@@ -1,0 +1,71 @@
+﻿
+@{
+    Layout = "_Layout";
+}
+@model CardapioViewModel
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio Quadra+</title>
+    <link rel="stylesheet" href="~/css/cardapio.css">
+</head>
+<body>
+    <div class="container">
+        <div class="menu-box">
+
+            <div class="topo">
+                <div class="logo">
+                    <img src="~/lib/Imagens/QuadraMais.png" alt="Logo Quadra+">
+                </div>
+                <h1 class="titulo">Cardápio</h1>
+            </div>
+
+            <div class="conteudo">
+                <div class="coluna">
+                    <div class="secao">
+                        <h3 class="secao-titulo">Bebidas:</h3>
+                        <ul>
+                            @foreach(var c in Model.Cardapio.Where(x => x.categoria == "Bebidas"))
+                            {
+                                <li>@c.nome_item — @String.Format("{0:C}", c.preco)</li>
+                            } 
+                        </ul>
+                    </div>
+
+                    <div class="secao">
+                        <h3 class="secao-titulo">Comidas:</h3>
+                        <ul>
+                            @foreach (var c in Model.Cardapio.Where(x => x.categoria == "Comidas"))
+                            {
+                                <li>@c.nome_item — @String.Format("{0:C}", c.preco)</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="coluna">
+                    <div class="secao">
+                        <h3 class="secao-titulo">Quadras</h3>
+                        <ul>
+                            @foreach (var q in Model.Quadras)
+                            {
+                                <li>@q.nome</li>
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="secao">
+                        <h3 class="secao-titulo">Bolas</h3>
+                        <ul>
+                            @foreach (var c in Model.Cardapio.Where(x => x.categoria == "Bolas"))
+                            {
+                                <li>@c.nome_item Quantidade:@c.preco.ToString("0")</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>

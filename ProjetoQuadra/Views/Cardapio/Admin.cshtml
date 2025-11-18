@@ -1,0 +1,157 @@
+﻿
+@{
+    Layout = "_Layout";
+}
+@model CardapioViewModel
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Admin</title>
+    <link rel="stylesheet" href="~/css/admin.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Painel do Administrador</h1>
+
+        <!-- BEBIDAS -->
+        <section class="secao">
+            <h2>Bebidas</h2>
+            <div class="botoes">
+                <button class="btn" onclick="mostrarTela('addBebida')">Adicionar</button>
+                <button class="btn" onclick="mostrarTela('delBebida')">Apagar</button>
+            </div>
+
+            <!-- Tela adicionar -->
+            <form asp-controller="Cardapio" asp-action="AdicionarItem">
+            <div id="addBebida" class="painel oculto">
+                <h3>Adicionar Bebida</h3>
+                <input type="text" name="nome_item" placeholder="Nome da bebida">
+                <input type="number" name="preco" placeholder="Preço (R$)">
+                <input type="hidden" name="categoria" value="Bebidas" />
+                <button class="btn confirmar">Adicionar</button>
+            </div>
+            </form>
+            <form asp-controller="Cardapio" asp-action="RemoverItem" method="post">
+            <!-- Tela apagar -->
+            <div id="delBebida" class="painel oculto">
+                <h3>Apagar Bebida</h3>
+                <ul class="lista">
+                        @foreach (var c in Model.Cardapio.Where(x => x.categoria == "Bebidas"))
+                        {
+                            <li onclick="selecionarItemCardapio(this, @c.id_item, 'delBebida')" data-id="@c.id_item">@c.nome_item</li>
+                        }
+                </ul>
+                    <input type="hidden" name="id" id="SelectedCardapioId" value="" />
+                <button class="btn confirmar" type="submit">Confirmar Exclusão</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- COMIDAS -->
+        <section class="secao">
+            <h2>Comidas</h2>
+            <div class="botoes">
+                <button class="btn" onclick="mostrarTela('addComida')">Adicionar</button>
+                <button class="btn" onclick="mostrarTela('delComida')">Apagar</button>
+            </div>
+            <!-- Tela adicionar -->
+            <form asp-controller="Cardapio" asp-action="AdicionarItem">
+            <div id="addComida" class="painel oculto">
+                <h3>Adicionar Comida</h3>
+                <input type="text" name="nome_item" placeholder="Nome da comida">
+                <input type="number" name="preco" placeholder="Preço (R$)">
+                <input type="hidden" name="categoria" value="Comidas" />
+                <button class="btn confirmar">Adicionar</button>
+                </div>
+            </form>
+            <!-- Tela apagar -->
+            <form asp-controller="Cardapio" asp-action="RemoverItem" method="post">
+            <div id="delComida" class="painel oculto">
+                <h3>Apagar Comida</h3>
+                    <ul class="lista">
+                        @foreach (var c in Model.Cardapio.Where(x => x.categoria == "Comidas"))
+                        {
+                            <li onclick="selecionarItemCardapio(this, @c.id_item, 'delComida')" data-id= "@c.id_item" >@c.nome_item</li>
+                        }
+                    </ul>
+                    <input type="hidden" name="id" id="SelectedCardapioId" value="" />
+                    <button class="btn confirmar" type="submit">Confirmar Exclusão</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- BOLAS -->
+        <section class="secao">
+            <h2>Bolas</h2>
+            <div class="botoes">
+                <button class="btn" onclick="mostrarTela('addBola')">Adicionar</button>
+                <button class="btn" onclick="mostrarTela('delBola')">Apagar</button>
+            </div>
+            <!-- Tela adicionar -->
+            <form asp-controller="Cardapio" asp-action="AdicionarItem">
+            <div id="addBola" class="painel oculto">
+                <h3>Adicionar Bola</h3>
+                <input type="text" name="nome_item" placeholder="Tipo de bola">
+                <input type="number" name="Preco" placeholder="Quantidade">
+                <input type="hidden" name="categoria" value="Bolas" />
+                <button class="btn confirmar">Adicionar</button>
+            </div>
+            </form>
+            <!-- Tela apagar -->
+            <form asp-controller="Cardapio" asp-action="RemoverItem" method="post">
+            <div id="delBola" class="painel oculto">
+                <h3>Apagar Bola</h3>
+                <ul class="lista">
+                        @foreach (var c in Model.Cardapio.Where(x => x.categoria == "Bolas"))
+                        {
+                            <li onclick="selecionarItemCardapio(this, @c.id_item, 'delBola')" data-id="@c.id_item">@c.nome_item</li>
+                        }
+                </ul>
+                    <input type="hidden" name="id" id="SelectedCardapioId" value="" />
+                <button class="btn confirmar" type="submit">Confirmar Exclusão</button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        function mostrarTela(id) {
+          document.querySelectorAll('.painel').forEach(p => p.classList.add('oculto'));
+          document.getElementById(id).classList.remove('oculto');
+        }
+
+        function selecionarItem(elemento, id) {
+        document.querySelectorAll('.lista li').forEach(li => li.classList.remove('selecionado'));
+        elemento.classList.add('selecionado');
+        const hid = document.getElementById('SelectedQuadraId');
+        if (hid) hid.value = id;
+        const url = new URL(window.location);
+        url.searchParams.set('delete', id);
+        window.history.replaceState({}, '', url);
+        }
+        function selecionarItemCardapio(elemento, id) {
+        const painel = elemento.closest('.painel') || document;
+        painel.querySelectorAll('.lista li').forEach(li => li.classList.remove('selecionado'));
+        elemento.classList.add('selecionado');
+        const form = elemento.closest('form');
+
+        let hid = form ? form.querySelector('input[name="id"]') : null;
+
+        if (!hid) hid = painel.querySelector('input[name="id"]');
+
+        if (!hid) hid = document.getElementById('SelectedCardapioId');
+
+        if (hid) {
+            hid.value = id;
+            console.log('SelectedCardapioId atualizado em:', hid, 'valor=', hid.value);
+        } else {
+            console.error('Hidden input "id" não encontrado nem no form nem no painel.');
+        }
+        try {
+            const url = new URL(window.location);
+            url.searchParams.set('delete_cardapio', id);
+            window.history.replaceState({}, '', url);
+          } catch (e) {}
+        }
+    </script>
+</body>

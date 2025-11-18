@@ -1,0 +1,144 @@
+﻿@using System.Linq
+@using ProjetoQuadra.Models
+@{
+    Layout = "_Layout";
+}
+@model ReservasViewModel
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadra+ — Reservas do Dia</title>
+    <link rel="stylesheet" href="~/css/reserva.css"/>
+</head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quadra+ — Reservas do Dia</title>
+    <link rel="stylesheet" href="~/css/reserva.css" />
+</head>
+<body>
+    <div class="moldura">
+        <header class="topo">
+            <div class="marca">
+                <img class="logo" src="~/lib/Imagens/QuadraMais.png" alt="Logo Quadra+">
+                <div>
+                    <h1>Quadra+</h1>
+                    <span class="subtitulo">Reservas do Dia</span>
+                </div>
+            </div>
+
+            <div class="usuario">
+                <div class="info">
+                    <p><strong>Nome:</strong> @(Model.Usuarios?.nome ?? "(nome do usuário)")</p>
+                </div>
+                <img class="avatar"
+                     src="~/lib/Imagens/icone-de-perfil (3).jpg"
+                     alt="Avatar do usuário">
+            </div>
+        </header>
+
+        <main class="conteudo">
+
+            <section class="cartao">
+                <h2>Reservas do Dia</h2>
+
+                <div class="tabela">
+                    <div class="cabeca">
+                        <div>Horário</div>
+                        <div>Status</div>
+                    </div>
+
+                    @if (Model.SlotsDisponiveis != null && Model.SlotsDisponiveis.Any())
+                    {
+                        foreach (var slot in Model.SlotsDisponiveis)
+                        {
+                            <div class="linha">
+                                <div>@slot.HorarioInicio - @slot.HorarioFim</div>
+
+                                <div>
+                                    <span class="etiqueta @(slot.Status.ToLower())">
+                                        @slot.Status
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p class="aviso-vazio">Nenhum horário encontrado.</p>
+                    }
+                </div>
+            </section>
+
+            <section class="cartao">
+                <h2>Histórico do Usuário</h2>
+
+                <div class="tabela historico">
+                    <div class="cabeca">
+                        <div>Dia</div>
+                        <div>Horário</div>
+                        <div>Status</div>
+                    </div>
+
+                    @if (Model.Reservas != null && Model.Reservas.Any())
+                    {
+                        foreach (var historico in Model.Reservas.OrderByDescending(r => r.data_reserva))
+                        {
+                            bool cancelada = historico.status == "Cancelada";
+                            string classeLinha = cancelada ? "linha destacada" : "linha";
+
+                            <div class="@classeLinha">
+                                <div>
+                                    <span class="pílula">
+                                        @historico.data_reserva.ToString("dd/MM")
+                                    </span>
+                                </div>
+
+                                <div>@historico.hora_inicio.ToString(@"hh\:mm")</div>
+
+                                <div>
+                                    <span class="etiqueta @(historico.status.ToLower())">
+                                        @historico.status
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p class="aviso-vazio">Nenhum histórico encontrado.</p>
+                    }
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="rodape">
+            <div class="mini-quadras botoes-quadra">
+                <div class="lista-quadras">
+
+                    <header class="topo">
+                        <nav class="escolher-quadra">
+                            <button class="opcao-quadra @(Model.QuadraSelecionada.id_quadra == 1 ? "ativo" : "")"
+                                    type="button"
+                                    onclick="window.location.href = '@Url.Action("Index", "Reserva", new { quadraId = 6, dataSelecionada = Model.DataConsulta.ToString("yyyy-MM-dd") })'">
+                                <img src="~/lib/Imagens/icone-de-perfil (1).jpg" alt="Quadra interna">
+                                <span>Quadra de Madeira</span>
+                            </button>
+
+                            <button class="opcao-quadra @(Model.QuadraSelecionada.id_quadra == 2 ? "ativo" : "")"
+                                    type="button"
+                                    onclick="window.location.href = '@Url.Action("Index", "Reserva", new { quadraId = 5, dataSelecionada = Model.DataConsulta.ToString("yyyy-MM-dd") })'">
+                                <img src="~/lib/Imagens/icone-de-perfil (2).jpg" alt="Quadra areia">
+                                <span>Quadra de Areia</span>
+                            </button>
+                        </nav>
+                    </header>
+
+                </div>
+
+            </div>
+        </footer>
+
+    </div>
+</body>
