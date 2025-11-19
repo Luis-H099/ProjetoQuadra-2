@@ -121,14 +121,14 @@
                         <nav class="escolher-quadra">
                             <button class="opcao-quadra @(Model.QuadraSelecionada.id_quadra == 1 ? "ativo" : "")"
                                     type="button"
-                                    onclick="window.location.href = '@Url.Action("Index", "Reserva", new { quadraId = 6, dataSelecionada = Model.DataConsulta.ToString("yyyy-MM-dd") })'">
+                                    onclick="window.location.href = '@Url.Action("Index", "Reserva", new { quadraId = 1, dataSelecionada = Model.DataConsulta.ToString("yyyy-MM-dd") })'">
                                 <img src="~/lib/Imagens/icone-de-perfil (1).jpg" alt="Quadra interna">
                                 <span>Quadra de Madeira</span>
                             </button>
 
                             <button class="opcao-quadra @(Model.QuadraSelecionada.id_quadra == 2 ? "ativo" : "")"
                                     type="button"
-                                    onclick="window.location.href = '@Url.Action("Index", "Reserva", new { quadraId = 5, dataSelecionada = Model.DataConsulta.ToString("yyyy-MM-dd") })'">
+                                    onclick="window.location.href = '@Url.Action("Index", "Reserva", new { quadraId = 2, dataSelecionada = Model.DataConsulta.ToString("yyyy-MM-dd") })'">
                                 <img src="~/lib/Imagens/icone-de-perfil (2).jpg" alt="Quadra areia">
                                 <span>Quadra de Areia</span>
                             </button>
